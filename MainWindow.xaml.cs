@@ -47,10 +47,9 @@ namespace WpfApp3
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,7 +65,6 @@ namespace WpfApp3
             Adding adding = new Adding();
             adding.ShowDialog();
             Products = new(MainContext.Instance.Products.OrderByDescending(x => x.Id));
-            Products.;
         }
     }
 }
